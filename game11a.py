@@ -117,6 +117,7 @@ def useCard(deck, usedDeck, players, tecPlayer, tecCard):
             players[chosenAttackPlayer].skipTurns += 1
     
     
+print("Игра карточная 11А Василий Львов©")
 deck = createDeck()
 usedDeck = []
 playerCount = int(input("Введите количество игроков: "))
