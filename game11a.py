@@ -1,4 +1,5 @@
 from random import shuffle
+from os import system
 
 def printCards():
     print("Номера удерживаемых карт: ", ", ".join(map(str, [c.number for c in players[tecPlayer].cardDeck])))
@@ -157,3 +158,4 @@ while len([1 for player in players if player.live]) > 1:
     if tecPlayer == playerCount:
         tecPlayer = 0
     input("Переход к следующему игроку(Enter для перехода)...")
+    system('cls')
