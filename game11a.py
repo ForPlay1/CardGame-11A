@@ -118,6 +118,7 @@ def useCard(deck, usedDeck, players, tecPlayer, tecCard):
     
     
 print("Игра карточная 11А Василий Львов©")
+print("Код писал: Владислав Хализов")
 deck = createDeck()
 usedDeck = []
 playerCount = int(input("Введите количество игроков: "))
