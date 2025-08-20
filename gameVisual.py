@@ -4,11 +4,11 @@ from PIL import ImageTk
 
 class Button:
     def click(self):
-        self.change_photo(images[self.number + 1])
+        pass
 
     def __init__(self, number, image):
         self.number = number
-        self.but = ttk.Button(command=self.click, image=image)
+        self.but = ttk.Button(command=self.click, image=image, padding=-4)
 
     def change_photo(self, image):
         self.but["image"] = image
@@ -16,6 +16,7 @@ class Button:
 root = Tk()
 root.title("11А")
 root.geometry("1920x1080")
+root["bg"] = "gray0"
 
 buts = []
 images = [ImageTk.PhotoImage(file=f"images/01.{i}.png") for i in range(1,4)]
@@ -27,8 +28,6 @@ for i in range(7):
 
 for i in range(len(buts)):
     buts[i].but.grid(row=0, column=i, padx=15)
-
-
 
 
 root.mainloop()
