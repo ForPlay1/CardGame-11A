@@ -21,7 +21,7 @@ class Player():
 class Card:
     def click(self):
         self.but.grid_forget()
-        print(self.number)
+        tecCard = self.number
 
     def __init__(self, number):
         self.number = number
