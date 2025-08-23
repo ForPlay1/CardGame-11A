@@ -22,13 +22,15 @@ class Card:
     def click(self):
         self.but.grid_forget()
         tecCard = self.number
+        if tecCard in [1, 2, 4, 5, 8, 11, 12, 13, 18, 19, 20, 22, 23, 25, 26, 27, 28, 29, 32, 33, 35, 38, 41]:
+            pass
 
     def __init__(self, number):
         self.number = number
         if number == 1:
-            self.but = ttk.Button(command=self.click, image=images[randint(0, 2)], padding=-4)
+            self.but = ttk.Button(frame, command=self.click, image=images[randint(0, 2)], padding=-4)
         else:
-            self.but = ttk.Button(command=self.click, image=images[number+1], padding=-4)
+            self.but = ttk.Button(frame, command=self.click, image=images[number+1], padding=-4)
 
     def change_photo(self, image):
         self.but["image"] = image
@@ -83,11 +85,19 @@ def checkInPlayer():
     textPlayers.pack_forget()
     butReady.pack_forget()
     typein.pack_forget()
-    textTurn['text'] = f'Игрок №{tecplayer+1}: {players[tecplayer].name}'
-    textTurn.grid(row=0, padx=10, pady=10)
-    for i in range(len(players[tecplayer].cardDeck)):
-        players[tecplayer].cardDeck[i].but.grid(row=1, column=i, padx=15, pady=10)
-
+    for i in range(playerCount):
+        textofPlayers[i]['text'] += players[i].name
+        match i:
+            case 0:
+                textofPlayers[i].pack(padx=10, pady=10, anchor=NW)
+                for j in range(len(players[i].cardDeck)):
+                    players[i].cardDeck[j].but.pack(padx=5, pady=10, anchor=N)
+            case 1:
+                textofPlayers[i].pack(padx=10, pady=10, anchor=NE)
+                for j in range(len(players[i].cardDeck)):
+                    players[i].cardDeck[j].but.pack(padx=5, pady=10, anchor=N)
+            
+    
 
 def startGame():
     global playerCount, tecplayer
@@ -107,7 +117,8 @@ def startGame():
 root = Tk()
 root.title("11А")
 root.geometry("1920x1080")
-root["bg"] = "gray0"
+root['bg']="gray"
+frame = ttk.Frame()
 
 # Textures
 images = [ImageTk.PhotoImage(file=f"images/01.{i}.png") for i in range(1,4)]
@@ -121,17 +132,18 @@ tecplayer = 1
 playerCount = 0
 
 # Widgets in the start
-textPlayers = ttk.Label(text="Сколько игроков будет играть?(2-21)")
-typein = ttk.Entry()
-butReady = ttk.Button(text="Подтвердить", command=startGame)
-aware = ttk.Label(foreground="red")
-textPlayers.pack(padx=10, pady=10)
-typein.pack(padx=10, pady=10)
-butReady.pack(padx=10, pady=10)
-aware.pack(padx=10, pady=10)
+textPlayers = ttk.Label(frame, text="Сколько игроков будет играть?(2-21)")
+typein = ttk.Entry(frame)
+butReady = ttk.Button(frame, text="Подтвердить", command=startGame)
+aware = ttk.Label(frame, foreground="red")
+textPlayers.pack(padx=10, pady=10, anchor=CENTER)
+typein.pack(padx=10, pady=10, anchor=CENTER)
+butReady.pack(padx=10, pady=10, anchor=CENTER)
+aware.pack(padx=10, pady=10, anchor=CENTER)
+frame.pack(expand=True)
 
 # Widgets in the game
-textTurn = ttk.Label() # Whos turn
+textofPlayers = [ttk.Label(frame, text=f"Игрок №{i}: ") for i in range(4)] # Players
 
 # for i in range(randint(2, len(cardDeck))):
 #     cardDeck[i].but.grid(row=0, column=i, padx=15)

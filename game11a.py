@@ -149,9 +149,9 @@ while len([1 for player in players if player.live]) > 1:
         players[tecPlayer].cardDeck.pop(tecCard)
     while len(deck)>0 and len(players[tecPlayer].cardDeck) < players[tecPlayer].maxCards:
         players[tecPlayer].cardDeck.append(deck.pop(0))
-        for i in range(len(players)):
-            while len(deck)>0 and len(players[i].cardDeck) < players[i].maxCards:
-                players[i].cardDeck.append(deck.pop(0))
+    for i in range(len(players)):
+        while len(deck)>0 and len(players[i].cardDeck) < players[i].maxCards:
+            players[i].cardDeck.append(deck.pop(0))
     players[tecPlayer].maxCards = 7
     printCards()
     tecPlayer += 1
